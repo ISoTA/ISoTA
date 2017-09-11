@@ -221,6 +221,120 @@ public class AddEditForm extends JDialog
 
 			}
 		});
+		tfRegDate.addInputMethodListener(new InputMethodListener() {
+			public void caretPositionChanged(InputMethodEvent arg0)
+			{
+			}
+
+			public void inputMethodTextChanged(InputMethodEvent arg0)
+			{
+			}
+		});
+
+		tfRegDate.setBounds(216, 125, 86, 20);
+		contentPanel.add(tfRegDate);
+		tfRegDate.setColumns(10);
+
+		JLabel label_2 = new JLabel("\u041E\u041A\u041F\u041E:");
+		label_2.setBounds(62, 159, 46, 14);
+		contentPanel.add(label_2);
+
+		tfOkpo = new JTextField();
+		tfOkpo.setEnabled(false);
+		tfOkpo.setBounds(216, 156, 86, 20);
+		contentPanel.add(tfOkpo);
+		tfOkpo.setColumns(10);
+
+		JLabel label_3 = new JLabel("\u0410\u0434\u0440\u0435\u0441:");
+		label_3.setBounds(62, 190, 46, 14);
+		contentPanel.add(label_3);
+
+		tfAdress = new JTextField();
+		tfAdress.setEnabled(false);
+		tfAdress.setBounds(216, 187, 167, 20);
+		contentPanel.add(tfAdress);
+		tfAdress.setColumns(10);
+
+		tfUID = new JTextField();
+		tfUID.setEnabled(false);
+		tfUID.setBounds(216, 218, 167, 20);
+		contentPanel.add(tfUID);
+		tfUID.setColumns(10);
+
+		tfNumber = new JTextField();
+		tfNumber.setEnabled(false);
+		tfNumber.setBounds(216, 249, 125, 20);
+		contentPanel.add(tfNumber);
+		tfNumber.setColumns(10);
+
+		tfJurAdress = new JTextField();
+		tfJurAdress.setEnabled(false);
+		tfJurAdress.setBounds(216, 280, 167, 20);
+		contentPanel.add(tfJurAdress);
+		tfJurAdress.setColumns(10);
+
+		JLabel label_4 = new JLabel("\u0418\u041D\u041D:");
+		label_4.setBounds(62, 221, 46, 14);
+		contentPanel.add(label_4);
+
+		JLabel label_5 = new JLabel(
+				"\u0422\u0435\u043B\u0435\u0444\u043E\u043D:");
+		label_5.setBounds(62, 252, 92, 14);
+		contentPanel.add(label_5);
+
+		JLabel label_6 = new JLabel(
+				"\u042E\u0440\u0438\u0434\u0438\u0447\u0435\u0441\u043A\u0438\u0439 \u0430\u0434\u0440\u0435\u0441:");
+		label_6.setBounds(62, 283, 144, 14);
+		contentPanel.add(label_6);
+
+		tfDirFIO = new JTextField();
+		tfDirFIO.setEnabled(false);
+		tfDirFIO.setBounds(216, 311, 167, 20);
+		contentPanel.add(tfDirFIO);
+		tfDirFIO.setColumns(10);
+
+		tfDirUID = new JTextField();
+		tfDirUID.setEnabled(false);
+		tfDirUID.setBounds(216, 342, 86, 20);
+		contentPanel.add(tfDirUID);
+		tfDirUID.setColumns(10);
+
+		tfDirNumber = new JTextField();
+		tfDirNumber.setEnabled(false);
+		tfDirNumber.setBounds(216, 373, 86, 20);
+		contentPanel.add(tfDirNumber);
+		tfDirNumber.setColumns(10);
+
+		tfSum = new JTextField();
+		tfSum.setEnabled(false);
+		tfSum.setBounds(216, 404, 86, 20);
+		contentPanel.add(tfSum);
+		tfSum.setColumns(10);
+
+		JLabel label_7 = new JLabel(
+				"\u0424\u0418\u041E \u0434\u0438\u0440\u0435\u043A\u0442\u043E\u0440\u0430:");
+		label_7.setBounds(62, 314, 144, 14);
+		contentPanel.add(label_7);
+
+		label_8 = new JLabel(
+				"\u0418\u041D\u041D \u0434\u0438\u0440\u0435\u043A\u0442\u043E\u0440\u0430:");
+		label_8.setBounds(62, 345, 144, 14);
+		contentPanel.add(label_8);
+
+		label_9 = new JLabel(
+				"\u0422\u0435\u043B\u0435\u0444\u043E\u043D \u0434\u0438\u0440\u0435\u043A\u0442\u043E\u0440\u0430:");
+		label_9.setBounds(62, 376, 144, 14);
+		contentPanel.add(label_9);
+
+		label_10 = new JLabel(
+				"\u0421\u0443\u043C\u043C\u0430 \u043A\u0430\u043F\u0438\u0442\u0430\u043B\u0430:");
+		label_10.setBounds(62, 407, 144, 14);
+		contentPanel.add(label_10);
+
+		JLabel label_11 = new JLabel("\u041B\u0438\u0446\u043E:");
+		label_11.setBounds(62, 73, 61, 14);
+		contentPanel.add(label_11);
+
 	}
 	
 }
