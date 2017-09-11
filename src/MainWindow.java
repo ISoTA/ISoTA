@@ -76,7 +76,21 @@ public class MainWindow
 	private JTable tableClientInfo;
 	private ClientModel[] clients;
 	private JTextField tfFIO;
-	
+	private JMenuItem reportsOpen;
+	private JMenuItem reportsCreate;
+	private JMenuItem reportsEdit;
+	private JMenuItem reportsDelete;
+	private JMenuItem reportsDeleteAll;
+	private JMenuItem clientsOpen;
+	private JMenuItem clientsAdd;
+	private JMenuItem clientsEdit;
+	private JMenuItem clientsDelete;
+	private JMenuItem clientsDeleteAll;
+	private JPanel panel_1;
+	private JMenu menu;
+	private JTextField tfSearch;
+	private JLabel label_2;
+	private JComboBox<String> cbColumn;
 
 	/** Launch the application. */
 	public static void main(String[] args)
@@ -358,4 +372,293 @@ public class MainWindow
 
 	}
 
-	
+	private void callLoginDialog()
+	{
+		MainWin.frmIsota.setVisible(false);
+		LoginDialog ld = new LoginDialog();
+		ld.setModalityType(Dialog.ModalityType.DOCUMENT_MODAL);
+		ld.setVisible(true);
+		if (!ld.getLoginResult()) System.exit(0);
+		ld.dispose();
+		MainWin.frmIsota.setVisible(true);
+	}
+
+	private void setSecurityRights()
+	{
+		byte sclass = User.getCurrentUser().getSecurityClass();
+		if (sclass == 3) // сотрудник анал.
+		{
+			reportsCreate.setEnabled(false);
+			reportsDelete.setEnabled(false);
+			reportsDeleteAll.setEnabled(false);
+			reportsEdit.setEnabled(false);
+			clientsAdd.setEnabled(false);
+			clientsDelete.setEnabled(false);
+			clientsDeleteAll.setEnabled(false);
+			clientsEdit.setEnabled(false);
+			menu.setVisible(false);
+		}
+
+		if (sclass == 2) // нач анал
+		{
+			reportsCreate.setEnabled(false);
+			reportsDelete.setEnabled(false);
+			reportsDeleteAll.setEnabled(false);
+			reportsEdit.setEnabled(false);
+			menu.setVisible(false);
+		}
+
+		if (sclass == 1 || sclass == 4)
+		{
+			menu.setVisible(false);
+		}
+	}
+
+	private class FrameWindowListener extends WindowAdapter
+	{
+		@Override
+		public void windowOpened(WindowEvent arg0)
+		{
+			callLoginDialog();
+			setSecurityRights();
+		}
+	}
+
+	private class FrameFocusListener extends FocusAdapter
+	{
+		@Override
+		public void focusGained(FocusEvent arg0)
+		{
+			if (User.getCurrentUser().getID() != 0)
+			{
+				MainWin.statusText.setText("ФИО пользователя: "
+						+ User.getCurrentUser().getName() + " "
+						+ User.getCurrentUser().getLastName());
+			}
+			updateClientList();
+		}
+	}
+
+	private class ExitChangeUserActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+			callLoginDialog();
+		}
+	}
+
+	private void updateClientList()
+	{
+		clients = ClientModel.findClientsAll();
+		DefaultListModel<ClientModel> listmodel = new DefaultListModel<ClientModel>();
+		for (ClientModel client : clients)
+		{
+			listmodel.addElement(client);
+		}
+		listFIO.setModel(listmodel);
+		panelClients.setVisible(true);
+	}
+
+	private class ClientsOpenActionListener implements ActionListener
+	{
+
+		public void actionPerformed(ActionEvent arg0)
+		{
+			panelClients.setVisible(true);
+			panelReports.setVisible(false);
+			updateClientList();
+		}
+	}
+
+	private class ListFIOListSelectionListener implements ListSelectionListener
+	{
+		public void valueChanged(ListSelectionEvent e)
+		{
+			ClientModel cm = listFIO.getSelectedValue();
+			if (cm != null)
+			{
+				DefaultTableModel model = (DefaultTableModel) tableClientInfo.getModel();
+				model.setRowCount(6);
+				model.setColumnCount(2);
+				model.setValueAt("Номер инспекции", 0, 0);
+				model.setValueAt(cm.getRevisionNum(), 0, 1);
+				model.setValueAt("Дата регистрации", 1, 0);
+				model.setValueAt(cm.getRegistrationDate(), 1, 1);
+				model.setValueAt("Адрес", 2, 0);
+				model.setValueAt(cm.getAdress(), 2, 1);
+				model.setValueAt("ФИО", 3, 0);
+				model.setValueAt(cm.getFIO(), 3, 1);
+				model.setValueAt("ИНН", 4, 0);
+				model.setValueAt(cm.getUID(), 4, 1);
+				model.setValueAt("Телефон", 5, 0);
+				model.setValueAt(cm.getPhoneNumber(), 5, 1);
+				String t = cm.getDirectorFIO();
+				if (!t.equals("null"))
+				{
+					model.setRowCount(11);
+					model.setValueAt("ФИО директора", 6, 0);
+					model.setValueAt(cm.getDirectorFIO(), 6, 1);
+					model.setValueAt("ИНН директора", 7, 0);
+					model.setValueAt(cm.getDirectorUID(), 7, 1);
+					model.setValueAt("Юридический адрес", 8, 0);
+					model.setValueAt(cm.getDirectorAdress(), 8, 1);
+					model.setValueAt("Номер директора", 9, 0);
+					model.setValueAt(cm.getDirectorNumber(), 9, 1);
+					model.setValueAt("Cумма капитала", 10, 0);
+					model.setValueAt(cm.getCapitalSum(), 10, 1);
+
+				}
+			}
+		}
+	}
+
+	private class ButtonActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+			// clients = ClientModel.findClientsAll();
+			clients = ClientModel.findClientsByName(tfFIO.getText());
+			DefaultListModel<ClientModel> listmodel = new DefaultListModel<ClientModel>();
+			for (ClientModel client : clients)
+			{
+				listmodel.addElement(client);
+			}
+			listFIO.setModel(listmodel);
+			panelClients.setVisible(true);
+		}
+	}
+
+	private class ClientsEditActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+			ClientModel cm = listFIO.getSelectedValue();
+			AddEditForm aef = new AddEditForm();
+			aef.setModel(cm);
+			aef.setModal(true);
+			aef.setVisible(true);
+		}
+	}
+
+	private class ClientsAddActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			AddEditForm aef = new AddEditForm();
+			aef.setModal(true);
+			aef.setVisible(true);
+		}
+	}
+
+	private class BtnSearchActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+			searchPos = reportLiveSearch(
+					tableReports.getSelectedRow()
+							* tableReports.getColumnCount()
+							+ tableReports.getSelectedColumn(),
+							cbColumn.getSelectedIndex()+1,
+					tfSearch.getText());
+			// tableReports.changeSelection(rowIndex, columnIndex, toggle,
+			// extend);
+		}
+	}
+
+	private class ReportsCreateActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+			AddEditFormReport aefr = new AddEditFormReport();
+			aefr.setModal(true);
+			aefr.setVisible(true);
+		}
+	}
+
+	private class ReportsEditActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+			AddEditFormReport aefr = new AddEditFormReport();
+			int line = tableReports.getSelectedRow();
+			if (line == -1)
+			{
+				JOptionPane.showMessageDialog(null, "Выберите строку.");
+				return;
+			}
+			ReportModel rm = ReportModel.findReportByID((Long) tableReports.getValueAt(line, 0));
+			aefr.setModel(rm);
+			aefr.setModal(true);
+			aefr.setVisible(true);
+		}
+	}
+
+	private class ReportsDeleteActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+			int line = tableReports.getSelectedRow();
+			if (line == -1)
+			{
+				JOptionPane.showMessageDialog(null, "Выберите строку.");
+				return;
+			}
+			ReportModel rm = new ReportModel();
+			rm.setID((Long) tableReports.getValueAt(line, 0));
+			rm.delete();
+		}
+	}
+
+	private class ReportsDeleteAllActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			ReportModel.deleteAll();
+		}
+	}
+
+	private class ClientsDeleteActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			ClientModel index = listFIO.getSelectedValue();
+			if (index == null)
+				JOptionPane.showMessageDialog(null, "Выберите элемент");
+			ClientModel cm = index;
+			cm.delete();
+		}
+	}
+
+	private class ClientsDeleteAllActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			ClientModel.deleteAll();
+		}
+	}
+
+	private Integer reportLiveSearch(Integer p, Integer c, String s)
+	{
+		TableModel dtm = tableReports.getModel();
+		int curpos = 0;
+		for (int i = 0; i < dtm.getRowCount(); i++)
+		{
+			for (int j = 1; j < dtm.getColumnCount(); j++)
+			{
+				curpos = i * dtm.getColumnCount() + j;
+				if (p < curpos && c==j)
+				{
+					Object o = dtm.getValueAt(i, j);
+					String so = o.toString();
+					if (so.contains(s))
+					{
+						tableReports.setCellSelectionEnabled(true);
+						tableReports.changeSelection(i, j, false, false);
+						return curpos;
+					}
+				}
+			}
+		}
+		return p;
+	}
+}
