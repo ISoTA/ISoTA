@@ -103,8 +103,6 @@ public class ReportModel
 	{
 		this.overpayment = newOverpayment;
 	}
-    
-    
 
 	public static ReportModel findReportByID(Long ID)
 	{

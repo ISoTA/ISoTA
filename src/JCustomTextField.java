@@ -45,7 +45,8 @@ public class JCustomTextField extends JTextField
 			originalForeground = fg;
 		}
 	}
-public Color getPlaceholderForeground()
+
+	public Color getPlaceholderForeground()
 	{
 		return placeholderForeground;
 	}
@@ -135,4 +136,5 @@ public Color getPlaceholderForeground()
 		setForeground(getPlaceholderForeground());
 		setTextWrittenIn(false);
 	}
+
 }

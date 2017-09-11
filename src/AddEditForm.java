@@ -77,7 +77,7 @@ public class AddEditForm extends JDialog
 			e.printStackTrace();
 		}
 	}
-	
+
 	public boolean Validate()
 	{
 		boolean res = true;
@@ -123,7 +123,7 @@ public class AddEditForm extends JDialog
 		tfAdress.setText(cm.getAdress());
 		// TODO jur
 	}
-	
+
 	private void FizAct()
 	{
 		okButton.setVisible(true);
@@ -154,7 +154,7 @@ public class AddEditForm extends JDialog
 		tfDirNumber.setEnabled(true);
 		tfSum.setEnabled(true);
 	}
-	
+
 	public AddEditForm()
 	{
 		dialog = this;
@@ -189,7 +189,6 @@ public class AddEditForm extends JDialog
 			}
 
 		});
-		
 		rbtnFiz.setBounds(167, 69, 107, 23);
 		contentPanel.add(rbtnFiz);
 		btnGroup.add(rbtnFiz);
@@ -311,7 +310,6 @@ public class AddEditForm extends JDialog
 		contentPanel.add(tfSum);
 		tfSum.setColumns(10);
 
-		
 		JLabel label_7 = new JLabel(
 				"\u0424\u0418\u041E \u0434\u0438\u0440\u0435\u043A\u0442\u043E\u0440\u0430:");
 		label_7.setBounds(62, 314, 144, 14);
@@ -335,7 +333,8 @@ public class AddEditForm extends JDialog
 		JLabel label_11 = new JLabel("\u041B\u0438\u0446\u043E:");
 		label_11.setBounds(62, 73, 61, 14);
 		contentPanel.add(label_11);
-{
+
+		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
