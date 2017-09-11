@@ -334,7 +334,95 @@ public class AddEditForm extends JDialog
 		JLabel label_11 = new JLabel("\u041B\u0438\u0446\u043E:");
 		label_11.setBounds(62, 73, 61, 14);
 		contentPanel.add(label_11);
+{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				okButton = new JButton(
+						"\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0)
+					{
+						if (Validate())
+						{
+							try
+							{
+								Date d = TextParser.parseDate(
+										tfRegDate.getText(), "Дата регистрации");
+								Integer okpo = TextParser.parseInteger(
+										tfOkpo.getText(), "ОКПО");
+								Integer UID = TextParser.parseInteger(
+										tfUID.getText(), "ИНН");
+								Integer number = TextParser.parseInteger(
+										tfNumber.getText(), "Номер");
+								Integer dirUID = null;
+								Integer dirNumber = null;
+								Integer sum = null;
+								if (rbtnJur.isSelected())
+								{
+									dirUID = TextParser.parseInteger(
+											tfDirUID.getText(), "ИНН Директора");
+									dirNumber = TextParser.parseInteger(
+											tfDirNumber.getText(),
+											"Телефон Директора");
+									sum = TextParser.parseInteger(
+											tfSum.getText(), "Сумма капитала");
+								}
 
+								ClientModel cm = null;
+								if (client != null) cm = client;
+								else cm = new ClientModel();
+								cm.setFIO(tfFIO.getText().toString());
+								cm.setRegistrationDate(d);
+								cm.setRevisionNum(okpo);
+								cm.setAdress(tfAdress.getText().toString());
+								cm.setUID(UID);
+								cm.setPhoneNumber(number);
+								cm.setDirectorAdress(tfJurAdress.getText()
+										.toString());
+								if (rbtnJur.isSelected())
+								{
+									cm.setDirectorFIO(tfDirFIO.getText()
+											.toString());
+									cm.setDirectorUID(dirUID);
+									cm.setDirectorNumber(dirNumber);
+									cm.setCapitalSum(sum);
+								}
+								cm.save();
+							}
+							catch (Exception e)
+							{
+								e.printStackTrace();
+							}
+
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null,
+									"Не все поля заполнены.");
+						}
+						dialog.setVisible(false);
+					}
+					
+				});
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				okButton.setVisible(false);
+				getRootPane().setDefaultButton(okButton);				
+			}
+			{
+				cancelButton = new JButton(
+						"\u041E\u0442\u043C\u0435\u043D\u0430");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0)
+					{
+						thisForm.dispose();
+					}
+				});
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
+			}
+		}
 	}
-	
 }
