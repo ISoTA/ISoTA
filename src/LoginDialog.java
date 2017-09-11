@@ -106,5 +106,59 @@ public class LoginDialog extends JDialog
 		LogDiag.setVisible(false);
 	}
 	
+	public boolean getLoginResult()
+	{
+		return this.loginresult;
+	}
 	
+	private class OkButtonMouseListener extends MouseAdapter
+	{
+		@Override
+		public void mouseClicked(MouseEvent arg0)
+		{
+			loginresult = false;
+			String user = tfLogin.getText();
+			String pass = new String(pfPass.getPassword());
+			
+			if (getUserFromDB(user,pass)) loginresult = true;
+			else loginresult = false;
+			
+			if (loginresult) LogDiag.setVisible(false);
+		}
+	}
+	
+	private class CancelButtonMouseListener extends MouseAdapter
+	{
+		@Override
+		public void mouseClicked(MouseEvent arg0)
+		{
+			loginresult = false;
+			LogDiag.setVisible(false);
+		}
+	}
+	
+	private boolean getUserFromDB(String user,String pass)
+	{
+		boolean res = false;
+		User.setCurrentUser(new UserModel());
+		UserModel um = UserModel.findUser(user, pass);
+		if (um.getID()==0)
+		{
+			JOptionPane.showMessageDialog(null, "Пользователь не найден.");
+			return res;
+		}
+		if (um.getLogin()!=user)
+		{
+			JOptionPane.showMessageDialog(null, "Неверный логин.");
+			return res;
+		}
+		if (um.getLogin()==user && um.getPassword()!=pass)
+		{
+			JOptionPane.showMessageDialog(null, "Неверный пароль.");
+			return res;
+		}
+		User.setCurrentUser(um);
+		if (um.getID()!=0) res=true;
+		return res;
+	}
 }
