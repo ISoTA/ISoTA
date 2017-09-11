@@ -82,19 +82,45 @@ public class AddEditForm extends JDialog
 	{
 		boolean res = true;
 		if (tfRegDate.getText().isEmpty()) return false;
-		 if (textField_1.getText().isEmpty()) return false;
-		 if (textField_2.getText().isEmpty()) return false;
-		 if (textField_3.getText().isEmpty()) return false;
-		 if (textField_4.getText().isEmpty()) return false;
-		 if (rbtnJur.isSelected())
-		 {
-		 if (textField_5.getText().isEmpty()) return false;
-		 if (textField_6.getText().isEmpty()) return false;
-		 if (textField_7.getText().isEmpty()) return false;
-		 if (textField_8.getText().isEmpty()) return false;
-		 if (textField_9.getText().isEmpty()) return false;
-		 }
+		// if (textField_1.getText().isEmpty()) return false;
+		// if (textField_2.getText().isEmpty()) return false;
+		// if (textField_3.getText().isEmpty()) return false;
+		// if (textField_4.getText().isEmpty()) return false;
+		// if (rbtnJur.isSelected())
+		// {
+		// if (textField_5.getText().isEmpty()) return false;
+		// if (textField_6.getText().isEmpty()) return false;
+		// if (textField_7.getText().isEmpty()) return false;
+		// if (textField_8.getText().isEmpty()) return false;
+		// if (textField_9.getText().isEmpty()) return false;
+		// }
 
 		return res;
-	}	
+	}
+
+	public void setModel(ClientModel cm)
+	{
+		this.client = cm;
+		tfFIO.setText(cm.getFIO());
+		if (cm.getDirectorAdress().equals(""))
+		{
+			rbtnFiz.setSelected(true);
+			FizAct();
+		}
+		else
+		{
+			rbtnJur.setSelected(true);
+			JurAct();
+		}
+		Date d = cm.getRegistrationDate();
+		String sd = d.toString();
+		String[] vals = sd.split("-");
+		tfRegDate.setText(vals[2]+"/"+vals[1]+"/"+vals[0]);
+		tfOkpo.setText(cm.getRevisionNum().toString());
+		tfAdress.setText(cm.getAdress());
+		tfUID.setText(cm.getUID().toString());
+		tfNumber.setText(cm.getPhoneNumber().toString());
+		tfAdress.setText(cm.getAdress());
+		// TODO jur
+	}
 }
