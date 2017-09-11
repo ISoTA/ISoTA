@@ -229,4 +229,19 @@ public class AddEditFormReport extends JDialog
 			}
 		}
 	}
+	
+	void setModel(ReportModel rm)
+	{
+		this.report = rm;
+		Date d = report.getOperationDate();
+		String[] sdv = d.toString().split("-");
+		tfOperDate.setText(sdv[2]+"/"+sdv[1]+"/"+sdv[0]);
+		tfOperCode.setText(report.getKod());
+		tfOverpayment.setText(report.getOverpayment().toString());
+		tfPaid.setText(report.getPaid().toString());
+		tfReturned.setText(report.getReturned().toString());
+		tfSum.setText(report.getSum().toString());
+		curClient = ClientModel.findClient(report.getClientID());
+		tfClient.setText(curClient.toString());
+	}
 }
