@@ -123,4 +123,35 @@ public class AddEditForm extends JDialog
 		tfAdress.setText(cm.getAdress());
 		// TODO jur
 	}
+	
+	private void FizAct()
+	{
+		okButton.setVisible(true);
+		// thisForm.setBounds(100, 100, 450, 355);
+		tfRegDate.setEnabled(true);
+		tfOkpo.setEnabled(true);
+		tfAdress.setEnabled(true);
+		tfUID.setEnabled(true);
+		tfNumber.setEnabled(true);
+		tfJurAdress.setEnabled(false);
+		tfDirFIO.setEnabled(false);
+		tfDirUID.setEnabled(false);
+		tfDirNumber.setEnabled(false);
+		tfSum.setEnabled(false);
+	}
+
+	private void JurAct()
+	{
+		okButton.setVisible(true);
+		tfRegDate.setEnabled(true);
+		tfOkpo.setEnabled(true);
+		tfAdress.setEnabled(true);
+		tfUID.setEnabled(true);
+		tfNumber.setEnabled(true);
+		tfJurAdress.setEnabled(true);
+		tfDirFIO.setEnabled(true);
+		tfDirUID.setEnabled(true);
+		tfDirNumber.setEnabled(true);
+		tfSum.setEnabled(true);
+	}
 }
