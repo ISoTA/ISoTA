@@ -27,3 +27,32 @@ public class TextParser
 		Matcher m = p.matcher(text);
 		return m.matches();
 	}
+	
+	public static Integer parseInteger(String text, String field) throws Exception
+	{
+		Integer res = 0;
+		try
+		{
+			res = Integer.parseInt(text);
+		}
+		catch (Exception e)
+		{
+			throw new Exception("Неверное целочисленное значение. Поле: "+field);
+		}
+		return res;
+	}
+	
+	public static Float parseFloat (String text, String field) throws Exception
+	{
+		Float res = (float) 0.0;
+		try
+		{
+			res = Float.parseFloat(text);
+		}
+		catch (Exception e)
+		{
+			throw new Exception("Неверное значение с плавающей точкой. Поле: "+field);
+		}
+		return res;
+	}	
+}
