@@ -154,4 +154,42 @@ public class AddEditForm extends JDialog
 		tfDirNumber.setEnabled(true);
 		tfSum.setEnabled(true);
 	}
+	
+	public AddEditForm()
+	{
+		dialog = this;
+		setTitle("\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043A\u043B\u0438\u0435\u043D\u0442\u0430");
+		setModal(true);
+		setBounds(100, 100, 450, 537);
+		setLocationRelativeTo(null);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		thisForm = this;
+
+		JLabel label_1 = new JLabel("\u0424\u0418\u041E:");
+		label_1.setBounds(62, 30, 46, 14);
+		contentPanel.add(label_1);
+
+		tfFIO = new JTextField();
+		tfFIO.setBounds(112, 27, 271, 20);
+		contentPanel.add(tfFIO);
+		tfFIO.setColumns(10);
+
+		ButtonGroup btnGroup = new ButtonGroup();
+
+		rbtnFiz = new JRadioButton(
+				"\u0424\u0438\u0437\u0438\u0447\u0435\u0441\u043A\u043E\u0435");
+
+		rbtnFiz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				FizAct();
+			}
+
+		});
+		
+	}
+	
 }
