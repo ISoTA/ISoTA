@@ -190,6 +190,37 @@ public class AddEditForm extends JDialog
 
 		});
 		
+		rbtnFiz.setBounds(167, 69, 107, 23);
+		contentPanel.add(rbtnFiz);
+		btnGroup.add(rbtnFiz);
+
+		rbtnJur = new JRadioButton(
+				"\u042E\u0440\u0438\u0434\u0438\u0447\u0435\u0441\u043A\u043E\u0435");
+		rbtnJur.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0)
+			{
+				JurAct();
+			}
+		});
+
+		rbtnJur.setBounds(276, 69, 107, 23);
+		contentPanel.add(rbtnJur);
+		btnGroup.add(rbtnJur);
+
+		JLabel label = new JLabel(
+				"\u0414\u0430\u0442\u0430 \u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0430\u0446\u0438\u0438:");
+		label.setBounds(62, 128, 144, 14);
+		contentPanel.add(label);
+
+		tfRegDate = new JTextField();
+		tfRegDate.setEnabled(false);
+		tfRegDate.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0)
+			{
+
+			}
+		});
 	}
 	
 }
