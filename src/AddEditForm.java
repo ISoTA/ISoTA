@@ -293,6 +293,24 @@ public class AddEditForm extends JDialog
 		contentPanel.add(tfDirFIO);
 		tfDirFIO.setColumns(10);
 
+		tfDirUID = new JTextField();
+		tfDirUID.setEnabled(false);
+		tfDirUID.setBounds(216, 342, 86, 20);
+		contentPanel.add(tfDirUID);
+		tfDirUID.setColumns(10);
+
+		tfDirNumber = new JTextField();
+		tfDirNumber.setEnabled(false);
+		tfDirNumber.setBounds(216, 373, 86, 20);
+		contentPanel.add(tfDirNumber);
+		tfDirNumber.setColumns(10);
+
+		tfSum = new JTextField();
+		tfSum.setEnabled(false);
+		tfSum.setBounds(216, 404, 86, 20);
+		contentPanel.add(tfSum);
+		tfSum.setColumns(10);
+
 		
 		JLabel label_7 = new JLabel(
 				"\u0424\u0418\u041E \u0434\u0438\u0440\u0435\u043A\u0442\u043E\u0440\u0430:");
