@@ -76,5 +76,25 @@ public class AddEditForm extends JDialog
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean Validate()
+	{
+		boolean res = true;
+		if (tfRegDate.getText().isEmpty()) return false;
+		 if (textField_1.getText().isEmpty()) return false;
+		 if (textField_2.getText().isEmpty()) return false;
+		 if (textField_3.getText().isEmpty()) return false;
+		 if (textField_4.getText().isEmpty()) return false;
+		 if (rbtnJur.isSelected())
+		 {
+		 if (textField_5.getText().isEmpty()) return false;
+		 if (textField_6.getText().isEmpty()) return false;
+		 if (textField_7.getText().isEmpty()) return false;
+		 if (textField_8.getText().isEmpty()) return false;
+		 if (textField_9.getText().isEmpty()) return false;
+		 }
+
+		return res;
 	}	
 }
